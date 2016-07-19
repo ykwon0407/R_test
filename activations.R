@@ -7,7 +7,7 @@ relu <- function(x){
 }
 
 leaky_relu <- function(x){
-  return (x*(x>=0) + 0.1*x*(x<=0))
+  return (x*(x>=0) + 0.15*x*(x<=0))
 }
 
 bdd_relu <- function(x, q=1.4){
@@ -15,7 +15,7 @@ bdd_relu <- function(x, q=1.4){
 }
 
 bdd_leaky_relu <- function(x, q=1.4){
-  return (x*(x>=0 & x<=q)/q + (x>=q) + 0.1*x*(x<=0))
+  return (x*(x>=0 & x<=q)/q + (1+0.15*x-0.15*q)*(x>=q) + 0.15*x*(x<=0))
 }
 
 
@@ -27,7 +27,7 @@ plot(tanh, -3, 3, add=TRUE, col='red', lwd=lwd, lty=2)
 plot(relu, -3, 3, add=TRUE, col='blue', lwd=lwd, lty=1)
 plot(leaky_relu, -3, 3, add=TRUE, col='green', lwd=lwd, lty=2)
 plot(bdd_relu, -3, 3, add=TRUE, col='cyan', lwd=lwd, lty=3)
-plot(bdd_leaky_relu, -3, 3, add=TRUE, col= 14, lwd=lwd, lty=3)
+plot(bdd_leaky_relu, -3, 3, add=TRUE, col= 14, lwd=lwd, lty=3, n=1001)
 #points()
 
 points(x = 1.4, y = par("usr")[3], pch = 3, las = 1, xpd = TRUE)
